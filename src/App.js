@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+//import ReactDOM from 'react-dom';
 import './css/main.css'
-import request from 'request'
+import axios from 'axios'
 //import logo from './logo.svg';
 
 
@@ -9,23 +9,14 @@ function TesteTime() {
   //http://worldtimeapi.org/api/timezone/:area/:location[/:region]
   let url = 'http://worldtimeapi.org/api/timezone/America/Sao_Paulo'
 
-
-  useEffect(() => {
-    let JSONTime
-    request(url, { json: true }, (error, resp, body) => {
-      if (error) {
-        console.log('Erro ao obter os dados: ' + error)
-      }
-
-      if (!error) {
-        console.log(body)
-        JSONTime = body
-        ReactDOM.render(<h1 style={{ color: 'white' }}>{JSON.stringify(JSONTime)}</h1>, document.getElementById('teste'))
-      }
-    }, [])
+  axios(url, { method: 'GET' }).then((value) => {
+    let data = value.data
+    console.log(data['datetime'])
   })
+
   return (
-    <div id='teste'></div >
+    <>
+    </>
   )
 }
 
